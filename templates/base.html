@@ -13,6 +13,15 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">My Django Blog</a>
+            <div class="ml-auto">
+                {% if user.is_authenticated %}
+                    <span class="navbar-text text-white mr-3">Welcome, {{ user.username }}!</span>
+                    <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+                {% else %}
+                    <a href="/login" class="btn btn-outline-light btn-sm mr-2">Login</a>
+                    <a href="/register" class="btn btn-light btn-sm">Register</a>
+                {% endif %}
+            </div>
         </div>
     </nav>
 
