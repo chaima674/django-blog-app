@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware', 
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -165,3 +167,17 @@ LOGGING = {
         },
     },
 }
+
+# Cache Configuration
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'blog_cache_table',
+    }
+}
+
+# Cache timeout in seconds (5 minutes = 300 seconds)
+CACHE_MIDDLEWARE_SECONDS = 300
+
+# Cache key prefix (to avoid conflicts)
+CACHE_MIDDLEWARE_KEY_PREFIX = 'blog_cache'
