@@ -1,4 +1,4 @@
-import logging  
+import logging
 from django.views import generic
 from .models import Post
 from rest_framework import viewsets
@@ -9,7 +9,6 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import NewUserForm
-
 
 logger = logging.getLogger(__name__)
 
@@ -48,7 +47,7 @@ class PostDetail(generic.DetailView):
                 text=comment_text
             )
             logger.warning(f"New comment added to post '{post.title}' by user {request.user.username}")
-            logger.info(f"Comment content: {comment_text[:50]}...")  # Log first 50 chars
+            logger.info(f"Comment content: {comment_text[:50]}...")
         else:
             logger.warning(f"Failed comment attempt on post '{post.title}' - User authenticated: {request.user.is_authenticated}")
         return redirect('post_detail', slug=post.slug)
